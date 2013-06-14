@@ -16,7 +16,10 @@ class CGC_IP_Login_Logging {
 	function log_ip( $user_login, $user ) {
 
 
-		$log = (array)get_user_meta( $user->ID, '_cgc_login_ips', true );
+		$log = get_user_meta( $user->ID, '_cgc_login_ips', true );
+		if( empty( $log ) )
+			$log = array();
+
 		$ip  = $this->get_ip();
 
 		if( sizeof( $log ) > 10 ) {
