@@ -9,7 +9,7 @@ class CGC_IP_Login_Logging {
 	function __construct() {
 
 		add_action( 'wp_login', array( $this, 'log_ip' ), 10, 2 );
-		add_action( 'wp_footer', array( $this, 'test' ) );
+		//add_action( 'wp_footer', array( $this, 'test' ) );
 
 	}
 
