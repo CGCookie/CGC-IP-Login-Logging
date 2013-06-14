@@ -13,6 +13,10 @@ class CGC_IP_Login_Logging {
 
 	}
 
+	static function get_log() {
+		return get_user_meta( get_current_user_id(), '_cgc_login_ips', true );
+	}
+
 	function log_ip( $user_login, $user ) {
 
 
