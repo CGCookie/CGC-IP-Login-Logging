@@ -40,8 +40,7 @@ class CGC_IP_Login_Logging {
 		// remove the first IP
 
 		$log[] = array(
-			'ip'   => $ip,
-			'geo'  => $response,
+			'geo'  => json_decode( $response ),
 			'time' => current_time( 'timestamp' )
 		);
 
