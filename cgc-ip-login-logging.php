@@ -16,7 +16,7 @@ class CGC_IP_Login_Logging {
 	function log_ip( $user_login, $user ) {
 
 
-		$log = (array)get_user_meta( $user_id, '_cgc_login_ips', true );
+		$log = (array)get_user_meta( $user->ID, '_cgc_login_ips', true );
 		$ip  = $this->get_ip();
 
 		if( sizeof( $log ) > 10 ) {
@@ -38,6 +38,7 @@ class CGC_IP_Login_Logging {
 			'time' => current_time( 'timestamp' )
 		);
 
+		update_user_meta( $user->ID, '_cgc_login_ips', $log );
 
 	}
 
