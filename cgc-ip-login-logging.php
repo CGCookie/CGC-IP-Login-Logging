@@ -8,12 +8,12 @@ class CGC_IP_Login_Logging {
 
 	function __construct() {
 
-		add_action( 'set_logged_in_cookie', array( $this, 'log_ip' ), 10, 5 );
+		add_action( 'wp_login', array( $this, 'log_ip' ), 10, 2 );
 		add_action( 'wp_footer', array( $this, 'test' ) );
 
 	}
 
-	function log_ip( $logged_in_cookie, $expire, $expiration, $user_id, $status = 'logged_in' ) {
+	function log_ip( $user_login, $user ) {
 
 
 		$log = (array)get_user_meta( $user_id, '_cgc_login_ips', true );
