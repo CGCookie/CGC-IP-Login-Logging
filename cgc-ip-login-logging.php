@@ -15,31 +15,29 @@ class CGC_IP_Login_Logging {
 
 	function log_ip( $logged_in_cookie, $expire, $expiration, $user_id, $status = 'logged_in' ) {
 
-		if( 'logged_in' == $status ) {
 
-			$log = (array)get_user_meta( $user_id, '_cgc_login_ips', true );
-			$ip  = $this->get_ip();
+		$log = (array)get_user_meta( $user_id, '_cgc_login_ips', true );
+		$ip  = $this->get_ip();
 
-			if( sizeof( $log ) > 10 ) {
+		if( sizeof( $log ) > 10 ) {
 
-				array_shift( $log );
-
-			}
-
-			$api = wp_remote_get( 'http://api.hostip.info/get_json.php?ip=' . $ip );
-			if( ! is_wp_error( $api ) ) {
-				$response = wp_remote_retrieve_body( $api );
-			}
-
-			// remove the first IP
-
-			$log[] = array(
-				'ip'   => $ip,
-				'geo'  => $response,
-				'time' => current_time( 'timestamp' )
-			);
+			array_shift( $log );
 
 		}
+
+		$api = wp_remote_get( 'http://api.hostip.info/get_json.php?ip=' . $ip );
+		if( ! is_wp_error( $api ) ) {
+			$response = wp_remote_retrieve_body( $api );
+		}
+
+		// remove the first IP
+
+		$log[] = array(
+			'ip'   => $ip,
+			'geo'  => $response,
+			'time' => current_time( 'timestamp' )
+		);
+
 
 	}
 
